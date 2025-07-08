@@ -1,0 +1,4 @@
+postId: { type: ObjectId, ref: "Post" },
+text: String,
+author: { type: ObjectId, ref: "User", required: false },
+createdAt: Date

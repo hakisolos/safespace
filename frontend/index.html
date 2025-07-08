@@ -1,0 +1,487 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAFESPACE - You Are Not Alone</title>
+    <meta name="description" content="A safe and loving space to share your feelings and stories" />
+    <meta name="author" content="Lovable" />
+
+    <meta property="og:title" content="Lovable - You Are Not Alone" />
+    <meta property="og:description" content="A safe and loving space to share your feelings and stories" />
+    <meta property="og:type" content="website" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              'poppins': ['Poppins', 'sans-serif'],
+            },
+            colors: {
+              'lovable-pink': 'hsl(330, 40%, 85%)',
+              'lovable-purple': 'hsl(270, 30%, 80%)',
+              'lovable-blue': 'hsl(220, 35%, 85%)',
+            },
+            keyframes: {
+              'fade-in': {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              'fade-in-delayed': {
+                '0%': { opacity: '0', transform: 'translateY(20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' }
+              },
+              'gentle-float': {
+                '0%, 100%': { transform: 'translateY(0px)' },
+                '50%': { transform: 'translateY(-5px)' }
+              },
+            },
+            animation: {
+              'fade-in': 'fade-in 0.6s ease-out',
+              'fade-in-delayed': 'fade-in-delayed 0.8s ease-out',
+              'gentle-float': 'gentle-float 3s ease-in-out infinite',
+            }
+          }
+        }
+      }
+    </script>
+    
+    <!-- Custom CSS -->
+    <style>
+      :root {
+        --background: 248 248 248;
+        --foreground: 23 23 23;
+        --card: 255 255 255;
+        --card-foreground: 23 23 23;
+        --primary: 100 100 100;
+        --primary-foreground: 250 250 250;
+        --muted: 245 245 245;
+        --muted-foreground: 115 115 115;
+        --border: 229 229 229;
+        --radius: 0.75rem;
+      }
+
+      .dark {
+        --background: 15 15 15;
+        --foreground: 250 250 250;
+        --card: 23 23 23;
+        --card-foreground: 250 250 250;
+        --primary: 200 200 200;
+        --primary-foreground: 23 23 23;
+        --muted: 39 39 42;
+        --muted-foreground: 161 161 170;
+        --border: 39 39 42;
+      }
+
+      body {
+        font-family: 'Poppins', sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+      }
+
+      .lovable-gradient {
+        background: linear-gradient(135deg, hsl(var(--background)) 0%, hsl(var(--muted)) 100%);
+      }
+      
+      .lovable-card {
+        background-color: hsl(var(--card) / 0.7);
+        backdrop-filter: blur(8px);
+        border: 1px solid hsl(var(--border) / 0.5);
+        border-radius: var(--radius);
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+        transition: all 0.3s ease;
+      }
+      
+      .lovable-button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 9999px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+      }
+      
+      .lovable-button:hover {
+        transform: scale(1.05);
+      }
+      
+      .lovable-button:active {
+        transform: scale(0.95);
+      }
+      
+      .lovable-input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        background-color: hsl(var(--card) / 0.5);
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        transition: all 0.3s ease;
+      }
+      
+      .lovable-input:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px hsl(var(--primary) / 0.3);
+      }
+
+      .hidden { display: none; }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <!-- Logo -->
+          <div class="flex items-center space-x-2 cursor-pointer hover:scale-105 transition-transform duration-300" onclick="showPage('landing')">
+            <div class="w-8 h-8 text-rose-400 animate-gentle-float">💜</div>
+            <span class="text-2xl font-semibold bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+              SAFESPACE
+            </span>
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-8">
+            <button onclick="showPage('landing')" class="nav-btn px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Home
+            </button>
+            <button onclick="showPage('feed')" class="nav-btn px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Stories
+            </button>
+            <button onclick="showPage('create')" class="nav-btn px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Share
+            </button>
+            <button onclick="showPage('auth')" class="nav-btn px-4 py-2 rounded-full font-medium transition-all duration-300 hover:scale-105 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Join Us
+            </button>
+          </div>
+
+          <!-- Theme Toggle -->
+          <div class="hidden md:flex items-center space-x-4">
+            <button id="theme-toggle" class="relative p-2 rounded-full bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110">
+              <div class="relative w-6 h-6">
+                <div id="sun-icon" class="absolute inset-0 w-6 h-6 transition-all duration-300">☀️</div>
+                <div id="moon-icon" class="absolute inset-0 w-6 h-6 transition-all duration-300 opacity-0">🌙</div>
+              </div>
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden flex items-center space-x-4">
+            <button id="theme-toggle-mobile" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300">
+              <div class="w-6 h-6">
+                <div id="sun-icon-mobile" class="transition-all duration-300">☀️</div>
+                <div id="moon-icon-mobile" class="hidden transition-all duration-300">🌙</div>
+              </div>
+            </button>
+            <button id="mobile-menu-btn" class="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-300">
+              <div id="hamburger" class="w-6 h-6">☰</div>
+              <div id="close" class="w-6 h-6 hidden">✕</div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden py-4 border-t border-gray-200 dark:border-gray-700 animate-fade-in">
+          <div class="flex flex-col space-y-3">
+            <button onclick="showPage('landing')" class="px-4 py-3 rounded-lg font-medium text-left transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Home
+            </button>
+            <button onclick="showPage('feed')" class="px-4 py-3 rounded-lg font-medium text-left transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Stories
+            </button>
+            <button onclick="showPage('create')" class="px-4 py-3 rounded-lg font-medium text-left transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Share
+            </button>
+            <button onclick="showPage('auth')" class="px-4 py-3 rounded-lg font-medium text-left transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-800">
+              Join Us
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main id="main-content">
+      <!-- Landing Page -->
+      <div id="landing-page" class="page">
+        <div class="min-h-screen">
+          <!-- Hero Section -->
+          <section class="relative overflow-hidden py-20 px-4 sm:px-6 lg:px-8">
+            <div class="absolute inset-0 lovable-gradient"></div>
+            <div class="relative max-w-4xl mx-auto text-center">
+              <div class="mb-8 animate-fade-in">
+                <div class="w-16 h-16 text-rose-400 mx-auto mb-6 animate-gentle-float text-6xl">💜</div>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 bg-gradient-to-r from-rose-400 via-purple-400 to-blue-400 bg-clip-text text-transparent">
+                  You Are Not Alone
+                </h1>
+                <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
+                  A safe and loving space where you can share your feelings, stories, and emotions. 
+                  Connect with others who understand your journey.
+                </p>
+              </div>
+
+              <!-- Rotating Quotes -->
+              <div class="mb-12 h-16 flex items-center justify-center">
+                <p id="rotating-quote" class="text-lg font-medium italic animate-fade-in-delayed max-w-2xl">
+                  "You are not alone in this journey. Your story matters. 💜"
+                </p>
+              </div>
+
+              <!-- CTA Buttons -->
+              <div class="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fade-in-delayed">
+                <button onclick="showPage('create')" class="lovable-button bg-gradient-to-r from-rose-400 to-purple-400 text-white hover:shadow-lg">
+                  Share Anonymously 💭
+                </button>
+                <button onclick="showPage('auth')" class="lovable-button bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-900 dark:text-white hover:bg-gray-50 dark:hover:bg-gray-700">
+                  Create Account 🫂
+                </button>
+                <button onclick="showPage('feed')" class="lovable-button bg-gradient-to-r from-blue-400 to-purple-400 text-white hover:shadow-lg">
+                  Explore Stories ✨
+                </button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Features Section -->
+          <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-6xl mx-auto">
+              <h2 class="text-3xl font-bold text-center mb-12">
+                A Safe Space for Every Heart
+              </h2>
+              
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="lovable-card p-8 text-center animate-fade-in">
+                  <div class="text-5xl text-purple-400 mx-auto mb-4 animate-gentle-float">✍️</div>
+                  <h3 class="text-xl font-semibold mb-4">Share Your Story</h3>
+                  <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Express your feelings freely, whether anonymously or with your name. Your voice matters and deserves to be heard.
+                  </p>
+                </div>
+
+                <div class="lovable-card p-8 text-center animate-fade-in">
+                  <div class="text-5xl text-blue-400 mx-auto mb-4 animate-gentle-float">👥</div>
+                  <h3 class="text-xl font-semibold mb-4">Connect & Support</h3>
+                  <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    React with hugs, encouragement, and prayers. Be part of a community that truly understands and cares.
+                  </p>
+                </div>
+
+                <div class="lovable-card p-8 text-center animate-fade-in">
+                  <div class="text-5xl text-rose-400 mx-auto mb-4 animate-gentle-float">🛡️</div>
+                  <h3 class="text-xl font-semibold mb-4">Stay Safe</h3>
+                  <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Moderated environment with community guidelines to ensure everyone feels safe, respected, and loved.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <!-- Auth Page -->
+      <div id="auth-page" class="page hidden">
+        <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-md w-full space-y-8">
+            <!-- Header -->
+            <div class="text-center animate-fade-in">
+              <div class="w-12 h-12 text-rose-400 mx-auto mb-4 animate-gentle-float text-5xl">💜</div>
+              <h2 id="auth-title" class="text-3xl font-bold mb-2">
+                Welcome Back
+              </h2>
+              <p id="auth-subtitle" class="text-gray-600 dark:text-gray-300">
+                Continue your journey of healing and connection
+              </p>
+            </div>
+
+            <!-- Tab Toggle -->
+            <div class="flex bg-gray-100 dark:bg-gray-800 rounded-lg p-1 animate-fade-in">
+              <button id="login-tab" class="flex-1 py-2 px-4 rounded-md font-medium transition-all duration-300 bg-white dark:bg-gray-700 shadow-sm">
+                Sign In
+              </button>
+              <button id="register-tab" class="flex-1 py-2 px-4 rounded-md font-medium transition-all duration-300 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white">
+                Sign Up
+              </button>
+            </div>
+
+            <!-- Form -->
+            <form id="auth-form" class="space-y-6 animate-fade-in-delayed">
+              <div>
+                <label for="username" class="block text-sm font-medium mb-2">
+                  Username (Optional)
+                </label>
+                <input id="username" type="text" placeholder="Choose a name or stay anonymous" class="lovable-input">
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  Leave empty to post anonymously
+                </p>
+              </div>
+
+              <div id="email-field" class="hidden">
+                <label for="email" class="block text-sm font-medium mb-2">
+                  Email
+                </label>
+                <input id="email" type="email" placeholder="your@email.com" class="lovable-input">
+              </div>
+
+              <div>
+                <label for="password" class="block text-sm font-medium mb-2">
+                  Password
+                </label>
+                <input id="password" type="password" placeholder="Enter your password" class="lovable-input" required>
+              </div>
+
+              <button type="submit" class="w-full lovable-button bg-gradient-to-r from-rose-400 to-purple-400 text-white hover:shadow-lg">
+                Sign In 💜
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feed Page -->
+      <div id="feed-page" class="page hidden">
+        <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-4xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-12 animate-fade-in">
+              <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+                Community Stories
+              </h1>
+              <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                Read, connect, and support others on their healing journey
+              </p>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="mb-8 animate-fade-in">
+              <div class="lovable-card p-6 text-center">
+                <h3 class="text-lg font-semibold mb-3">Share Your Heart</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                  Your story could be the light someone else needs today
+                </p>
+                <button onclick="showPage('create')" class="lovable-button bg-gradient-to-r from-rose-400 to-purple-400 text-white hover:shadow-lg">
+                  Share Your Story 💭
+                </button>
+              </div>
+            </div>
+
+            <!-- Posts -->
+            <div id="posts-container" class="space-y-6">
+              <!-- Posts will be dynamically generated here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Create Post Page -->
+      <div id="create-page" class="page hidden">
+        <div class="min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+          <div class="max-w-2xl mx-auto">
+            <!-- Header -->
+            <div class="text-center mb-8 animate-fade-in">
+              <h1 class="text-4xl font-bold mb-4 bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+                Share Your Heart
+              </h1>
+              <p class="text-lg text-gray-600 dark:text-gray-300">
+                Your feelings are valid. Your story matters. You are not alone.
+              </p>
+            </div>
+
+            <!-- Form -->
+            <form id="create-form" class="space-y-6 animate-fade-in-delayed">
+              <div>
+                <label for="post-content" class="block text-sm font-medium mb-3">
+                  What's on your heart? 💜
+                </label>
+                <textarea id="post-content" rows="8" placeholder="Share your thoughts, feelings, or experiences. Take your time... we're here to listen." class="lovable-input resize-none min-h-[200px]" required></textarea>
+                <div class="mt-2 flex justify-between text-sm text-gray-500 dark:text-gray-400">
+                  <span>Be authentic. Be you.</span>
+                  <span id="char-count">0 characters</span>
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-sm font-medium mb-3">
+                  How are you feeling? 🎭
+                </label>
+                <div id="mood-selector" class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  <!-- Mood buttons will be generated here -->
+                </div>
+              </div>
+
+              <button type="submit" id="submit-btn" class="w-full lovable-button bg-gray-300 dark:bg-gray-600 text-gray-500 dark:text-gray-400 cursor-not-allowed text-lg py-4" disabled>
+                Let It Out 🖤
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Brand -->
+          <div class="space-y-4">
+            <div class="flex items-center space-x-2">
+              <div class="w-6 h-6 text-rose-400">💜</div>
+              <span class="text-xl font-semibold bg-gradient-to-r from-rose-400 to-purple-400 bg-clip-text text-transparent">
+                Lovable
+              </span>
+            </div>
+            <p class="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+              A safe and loving space where you can share your story, connect with others, and find comfort in knowing you're not alone.
+            </p>
+          </div>
+
+          <!-- Links -->
+          <div class="space-y-4">
+            <h3 class="font-semibold">Support</h3>
+            <div class="space-y-2">
+              <a href="#" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300">
+                <span class="text-sm">🛡️ Community Guidelines</span>
+              </a>
+              <a href="#" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300">
+                <span class="text-sm">💜 Crisis Resources</span>
+              </a>
+              <a href="#" class="flex items-center space-x-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors duration-300">
+                <span class="text-sm">✉️ Contact Us</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Message -->
+          <div class="space-y-4">
+            <h3 class="font-semibold">Remember</h3>
+            <div class="p-4 bg-gradient-to-br from-rose-50 to-purple-50 dark:from-rose-950/20 dark:to-purple-950/20 rounded-lg border border-gray-200 dark:border-gray-600">
+              <p class="text-sm text-gray-600 dark:text-gray-300 italic">
+                "You are braver than you believe, stronger than you seem, and more loved than you know." 💜
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+          <p class="text-sm text-gray-600 dark:text-gray-300">
+            Made with 💜 for those who need a safe space to share.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>

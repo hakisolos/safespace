@@ -1,0 +1,10 @@
+text: String,             // What they wrote
+mood: String,             // e.g. "Broken", "Lost", "Empty"
+anonymous: Boolean,       // true if no user tied to it
+author: { type: ObjectId, ref: "User", required: false },
+reactions: {
+  hugs: Number,
+  stayStrong: Number,
+  prayers: Number
+},
+createdAt: Date

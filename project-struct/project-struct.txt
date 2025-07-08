@@ -1,0 +1,30 @@
+depressify-blog/
+│
+├── src/
+│   ├── index.ts                ← Main entry (setup Hono app, routes)
+│
+│   ├── lib/
+│   │   ├── supabase.ts         ← Supabase client instance
+│   │   └── types.ts            ← Shared TypeScript types (Post, User, Comment)
+│
+│   ├── routes/
+│   │   ├── auth.ts             ← Auth routes (login/register via Supabase)
+│   │   ├── posts.ts            ← Create/Get/Delete posts
+│   │   └── comments.ts         ← Commenting logic
+│
+│   ├── controllers/
+│   │   ├── authController.ts
+│   │   ├── postController.ts
+│   │   └── commentController.ts
+│
+│   ├── middleware/
+│   │   └── auth.ts             ← Validate Supabase JWT or user session
+│
+│   └── utils/
+│       └── moodTags.ts         ← Preset moods list for post tagging
+│
+├── .env                        ← SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY
+├── bun.lockb
+├── tsconfig.json
+├── .gitignore
+└── README.md
