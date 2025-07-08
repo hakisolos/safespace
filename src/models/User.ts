@@ -18,5 +18,4 @@ const userschema = new mongoose.Schema<user>({
         unique: false
     }
 })
-const User = mongoose.model("User", userschema)
-export default User
+export const User = mongoose.model("User", userschema)

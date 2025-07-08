@@ -7,7 +7,7 @@ app.get("/", (c) => {
     return c.json("hello world")
 })
 
-mongoose.connect("mongodb+srv://hakixer:thi54dAl5brg3r41@shell-haki.snamlx9.mongodb.net/?retryWrites=true&w=majority&appName=shell-haki")
+mongoose.connect(String(process.env.mongo))
     .then(() => { console.log("mongoose connected") })
 Bun.serve({
     fetch: app.fetch,
