@@ -1,0 +1,8 @@
+# mySuperSecret123
+POST http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+    "email": "haki@love.dev",
+    "password": "mySuperSecret123"    
+}

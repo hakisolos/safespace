@@ -1,5 +1,4 @@
 import { User } from "../models/User";
-
 export async function newUser(
   email: string,
   username: string,
@@ -33,5 +32,19 @@ export async function delUser(email: string) {
   } catch (e) {
     console.log(e);
     return { success: false, error: e };
+  }
+}
+
+export async function getUser(email: string) {
+  try {
+    const usr = await User.findOne({email: email})
+    if(!usr) {
+      console.log("couldnt find user")
+      return {success: false, error: "user not found"}
+    }
+    return usr
+  }catch(e) {
+    console.log(e)
+    return {success: false, error: e}
   }
 }
